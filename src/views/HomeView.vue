@@ -292,6 +292,7 @@ function getImages() {
         width: 100%;
         height: 100%;
         top: 0;
+        left: 0;
       }
 
       img {
