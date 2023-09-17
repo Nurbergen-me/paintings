@@ -522,7 +522,7 @@ const totalCost = computed(() => {
 
 function getImage() {
   api.get(`/v2/images/${route.params.id}`).then(res => {
-    Object.assign(image, res.data)
+    Object.assign(image, res.data) 
   })
 }
 
