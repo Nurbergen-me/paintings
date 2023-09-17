@@ -167,6 +167,7 @@ const images = reactive([])
 const search = ref('')
 let page = ref(2)
 
+
 onMounted(() => {
   getImages()
 })
