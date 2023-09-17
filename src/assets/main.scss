@@ -1,0 +1,68 @@
+@import './base.css';
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 60px;
+    font-weight: 700;
+}
+
+button {
+    font-family: 'Tinos', serif;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.btn {
+    border-radius: 10px;
+    background: #000;
+    padding: 10px 20px;
+    border: 1px solid #000;
+    font-size: 20px;
+    color: #fff;
+    font-family: 'Tinos', serif;
+
+    &_secondary {
+        background: transparent;
+        color: rgba(0, 0, 0, 0.75);
+    }
+}
+
+input {
+    font-family: 'Tinos', serif;
+    border: none;
+    outline: none;
+}
+
+@media screen and (max-width: 1400px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .container {
+        max-width: 740px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        max-width: 90%;
+    }
+}
