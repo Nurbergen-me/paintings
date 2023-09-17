@@ -302,12 +302,34 @@
             Оставьте заявку и получите бесплатный эскиз своей будущей картины перед изготовлением
           </div>
           <form @submit.prevent="handleForm" class="modal_form">
-            <input type="text" v-model="formData.name" class="modal_input" placeholder="Как к вам обращаться?">
-            <input type="text" v-model="formData.phone" class="modal_input" placeholder="На какой номер отправить эскиз?">
-            <textarea v-model="formData.message" class="modal_input modal_textarea" placeholder="Сообщение"></textarea>
-            <button class="btn modal_btn">
+            <input 
+              type="text" 
+              v-model="formData.name" 
+              class="modal_input" 
+              :class="{'onerror': formData.nameError}"
+              placeholder="Как к вам обращаться?">
+            <input 
+              type="number" 
+              v-model="formData.phone" 
+              class="modal_input" 
+              :class="{'onerror': formData.phoneError}"
+              placeholder="На какой номер отправить эскиз?">
+            <textarea 
+              v-model="formData.message" 
+              class="modal_input modal_textarea" 
+              placeholder="Сообщение"></textarea>
+            <button class="btn modal_btn" :class="{'disabled': formData.send}">
               Отправить
             </button>
+            <div class="modal_message danger" v-if="formData.nameError || formData.phoneError">
+              Заполните обязательные поля!
+            </div>
+            <div class="modal_message" v-if="formData.send">
+              Форма отправлена!
+            </div>
+            <div class="modal_message danger" v-if="formData.send === false">
+              Форма не отправлена!
+            </div>
           </form>
         </div>
       </div>
@@ -481,9 +503,11 @@ const prices = [
 ]
 const formData = reactive({
   name: '',
+  nameError: false,
   phone: '',
+  phoneError: false,
   message: '',
-  send: false
+  send: null
 })
 
 onMounted(() => {
@@ -503,7 +527,12 @@ function getImage() {
 }
 
 function handleForm() {
-  console.log('form')
+  formData.nameError = formData.name.trim() === ''
+  formData.phoneError = formData.phone.trim() === ''
+  if (formData.nameError || formData.phoneError) {
+    return
+  }
+
   Email.send({
       Host : "smtp.elasticemail.com",
       Username : "nurik.eleshov@gmail.com",
@@ -512,7 +541,7 @@ function handleForm() {
       Port: '2525',
       From : "nurik.eleshov@gmail.com",
       Subject : "Заявка от " + formData.name,
-      Body : `Имя: ${formData.name}, Телефон: ${formData.phone}, Сообщение: ${formData.message}`
+      Body : `Имя: ${formData.name},<br> Телефон: ${formData.phone},<br> Сообщение: ${formData.message},<br>Вид: ${type.value},<br> Размер:  ${size.value},<br> Цвет рамки: ${frame.value},<br> Цвет паспорту: ${color.value}, <br> Цена: ${totalCost.value}`
   }).then(
     message => {
       formData.send = message === 'OK'
@@ -822,6 +851,11 @@ function handleForm() {
     margin-bottom: 20px;
     padding: 10px;
     text-align: center;
+
+    &.onerror {
+      color: #CA0303;
+      border-color: #CA0303;
+    }
   }
   &_textarea {
     height: 90px;
@@ -829,6 +863,21 @@ function handleForm() {
   }
   &_btn {
     padding: 4px 40px 6px;
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+  &_message {
+    font-size: 20px;
+    color: #0F7E0D;
+    text-align: center;
+    margin-top: 20px;
+
+    &.danger {
+      color: #CA0303;
+    }
   }
 }
 

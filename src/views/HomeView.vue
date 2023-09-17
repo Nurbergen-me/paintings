@@ -12,9 +12,9 @@
             Печать портретов, картин, постеров и репродукций на заказ    
           </div>
           <div class="header_btns">
-            <button class="btn header_btn">
+            <a href="#search" class="btn header_btn">
               Выбрать картину
-            </button>
+            </a>
             <a href="#" class="btn btn_secondary header_btn">
               Написать в WhatsApp
             </a>
@@ -23,7 +23,7 @@
       </div>
     </div>
   </header>
-  <section class="search">
+  <section class="search" id="search">
     <div class="container">
       <div class="search_wrap">
         <input 
