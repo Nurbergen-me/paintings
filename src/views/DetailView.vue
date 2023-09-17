@@ -528,7 +528,7 @@ function getImage() {
 
 function handleForm() {
   formData.nameError = formData.name.trim() === ''
-  formData.phoneError = formData.phone.trim() === ''
+  formData.phoneError = formData.phone === ''
   if (formData.nameError || formData.phoneError) {
     return
   }
