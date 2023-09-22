@@ -111,26 +111,35 @@
               <img src="@/assets/images/arrow-down.png" alt="arrow down">
               <span>Размер</span>
             </div>
-            <img src="@/assets/images/sizes.png" alt="sizes" class="detail_sizes_img">
             <div class="detail_calc_body detail_sizes">
               <div class="detail_sizes_item">
-                <label for="size-1">30x40</label>
+                <label for="size-1">
+                  <img src="@/assets/images/size-1.png" alt="">
+                </label>
                 <input type="radio" v-model="size" id="size-1" value="1" class="detail_sizes_select">
               </div>
               <div class="detail_sizes_item">
-                <label for="size-2">40x60</label>
+                <label for="size-2">
+                  <img src="@/assets/images/size-2.png" alt="">
+                </label>
                 <input type="radio" v-model="size" id="size-2" value="2" class="detail_sizes_select">
               </div>
               <div class="detail_sizes_item">
-                <label for="size-3">50x70</label>
+                <label for="size-3">
+                  <img src="@/assets/images/size-3.png" alt="">
+                </label>
                 <input type="radio" v-model="size" id="size-3" value="3" class="detail_sizes_select">
               </div>
               <div class="detail_sizes_item">
-                <label for="size-4">60x80</label>
+                <label for="size-4">
+                  <img src="@/assets/images/size-4.png" alt="">
+                </label>
                 <input type="radio" v-model="size" id="size-4" value="4" class="detail_sizes_select">
               </div>
               <div class="detail_sizes_item">
-                <label for="size-5">80x110</label>
+                <label for="size-5">
+                  <img src="@/assets/images/size-5.png" alt="">
+                </label>
                 <input type="radio" v-model="size" id="size-5" value="5" class="detail_sizes_select">
               </div>
             </div>
@@ -776,7 +785,9 @@ function handleForm() {
     }
     &_item {
       label {
-        display: none;
+        img {
+          width: 100%;
+        }
       }
     }
     &_select {
