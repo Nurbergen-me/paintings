@@ -46,17 +46,22 @@
           {{ item.value }}
         </button>
       </div> 
-      <div class="search_results" v-if="images.length">
-        <router-link :to="{name: 'detail', params: {id: image.id}}" class="search_results_item" v-for="image in images" :key="image.id">
-          <img :src="image.assets.huge_thumb.url" alt="image">
-        </router-link>
+      <template v-if="images.length">
+        <div class="search_results">
+          <router-link :to="{name: 'detail', params: {id: image.id}}" class="search_results_item" v-for="image in images" :key="image.id">
+            <img :src="image.assets.huge_thumb.url" alt="image">
+          </router-link>
+        </div>
+        <button class="search_more" @click="loadMore()">
+            <img src="@/assets/images/arrow-down.png" alt="arrow down">
+            <span>
+              ещё
+            </span>
+        </button>
+      </template>
+      <div v-else class="search_results_empty">
+        По такому запросу изображения не найдены
       </div>
-      <button class="search_more" @click="loadMore()">
-          <img src="@/assets/images/arrow-down.png" alt="arrow down">
-          <span>
-            ещё
-          </span>
-      </button>
     </div>
   </section>
 </template>
@@ -301,6 +306,13 @@ function getImages() {
         object-fit: cover;
         z-index: -1;
       }
+    }
+
+    &_empty {
+      font-size: 32px;
+      max-width: 380px;
+      margin: 60px auto;
+      text-align: center;
     }
   }
   &_more {

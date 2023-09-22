@@ -49,6 +49,11 @@
             </div>
         </div>
     </div>
+    <div class="footer_bottom">
+        <a href="https://astana-it.kz/" target="_blank" class="footer_bottom_link">
+            Создание сайтов Astana IT
+        </a>
+    </div>
   </footer>
 </template>
 
@@ -68,12 +73,13 @@ import IconYandex from './icons/IconYandex.vue'
 <style lang="scss" scoped>
 .footer {
     background: #F7F6F4;
-    padding: 50px 0 40px;
+    padding-top: 50px;
 
     &_wrap {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding-bottom: 40px;
     }
     &_left {
         display: flex;
@@ -108,6 +114,16 @@ import IconYandex from './icons/IconYandex.vue'
             display: flex;
             align-items: center;
             gap: 15px;
+        }
+    }
+    &_bottom {
+        background: rgba(255,255,255,0.5);
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        &_link {
+            color: #000;
+            font-size: 12px;
         }
     }
 }

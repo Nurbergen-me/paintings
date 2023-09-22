@@ -111,6 +111,7 @@
               <img src="@/assets/images/arrow-down.png" alt="arrow down">
               <span>Размер</span>
             </div>
+            <img src="@/assets/images/sizes.png" alt="sizes" class="detail_sizes_img">
             <div class="detail_calc_body detail_sizes">
               <div class="detail_sizes_item">
                 <label for="size-1">30x40</label>
@@ -132,6 +133,14 @@
                 <label for="size-5">80x110</label>
                 <input type="radio" v-model="size" id="size-5" value="5" class="detail_sizes_select">
               </div>
+            </div>
+            <div class="detail_sizes_bottom">
+              <div class="detail_sizes_bottom_text">
+                Если не нашли нужного вам <br> размера напишите нам напрямую
+              </div>
+              <a href="#" class="btn detail_sizes_bottom_btn">
+                 WhatsApp
+              </a>
             </div>
           </div>
           <div class="detail_calc_section" v-if="type === 1 || type === 2 || type === 4">
@@ -318,13 +327,14 @@
               v-model="formData.message" 
               class="modal_input modal_textarea" 
               placeholder="Сообщение"></textarea>
-            <button class="btn modal_btn" :class="{'disabled': formData.send}">
+            <button class="btn modal_btn" :class="{'disabled': formData.send !== null}"
+            >
               Отправить
             </button>
             <div class="modal_message danger" v-if="formData.nameError || formData.phoneError">
               Заполните обязательные поля!
             </div>
-            <div class="modal_message" v-if="formData.send">
+            <div class="modal_message" v-if="formData.send === true">
               Форма отправлена!
             </div>
             <div class="modal_message danger" v-if="formData.send === false">
@@ -349,6 +359,7 @@ const size = ref(1)
 const frame = ref(119410)
 const color = ref(8247)
 const modalShow = ref(false)
+const loading = ref(true)
 const prices = [
   {
     id: 1,
@@ -533,11 +544,12 @@ function handleForm() {
     return
   }
 
+  formData.send = ''
   Email.send({
       Host : "smtp.elasticemail.com",
-      Username : "nurik.eleshov@gmail.com",
-      Password : "FC9FFFF86790B913DC2B4C3779627730C2F4",
-      To : 'web.developer.nurbergen@gmail.com',
+      Username : "nurbergeneleshov@yandex.ru",
+      Password : "5CFA81FB251672CEA715FCCD3AC2D9B2C449",
+      To : 'nurbergeneleshov@yandex.ru',
       Port: '2525',
       From : "nurik.eleshov@gmail.com",
       Subject : "Заявка от " + formData.name,
@@ -553,9 +565,15 @@ function handleForm() {
 
 <style lang="scss" scoped>
 .detail {
+  padding-top: 100px;
   &_nav {
     background: #F7F6F4;
     padding: 36px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
 
     &_wrap {
       display: flex;
@@ -756,9 +774,31 @@ function handleForm() {
     &_img {
       width: 100%;
     }
+    &_item {
+      label {
+        display: none;
+      }
+    }
     &_select {
       display: block;
       margin: 10px auto 0;
+    }
+    &_bottom {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+
+      &_text {
+        font-size: 24px;
+        text-align: center;
+      }
+
+      &_btn {
+        background: #4EB65F;
+        border-color: #4EB65F;
+      }
     }
   }
   &_frames {
@@ -880,9 +920,21 @@ function handleForm() {
     }
   }
 }
+@media screen and (max-width: 1200px) {
+  .detail {
+    &_sizes {
+      &_bottom {
+        &_text {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
 
 @media screen and (max-width: 992px) {
   .detail {
+    padding-top: 60px;
     &_nav {
       padding: 15px 0;
     }
@@ -962,6 +1014,11 @@ function handleForm() {
         span {
           font-size: 12px;
         }
+      }
+    }
+    &_sizes {
+      &_bottom {
+        flex-direction: column;
       }
     }
   }
